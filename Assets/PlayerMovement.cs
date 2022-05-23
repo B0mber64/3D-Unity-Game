@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Rigidbody p;
+
     public CharacterController controller;
     // movement speed
     public float speed = 15f;
@@ -66,5 +68,11 @@ public class PlayerMovement : MonoBehaviour
             speed = 15;
         }
 
+        if(p.position.y < 9f)
+        {
+            transform.position = new Vector3(836.33f, 11.73f, -871.65f);
+        }
+
     }
+    
 }
