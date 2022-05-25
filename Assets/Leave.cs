@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Leave : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public WinScreen winScreen;
+
+    public ScrapCollected scrapCollected;
+
+    private void OnTriggerEnter()
     {
-        ScrapCollected scrapCollected = other.GetComponent<ScrapCollected>();
 
         if (scrapCollected.NumberOfScrap == 8)
         {
-            
+            winScreen.Win();
         }
     }
 }

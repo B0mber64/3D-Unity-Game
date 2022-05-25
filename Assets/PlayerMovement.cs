@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody p;
+    private GameObject playerObj = null;
+    Vector3 lastGrounded;
 
     public CharacterController controller;
     // movement speed
@@ -27,8 +28,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (playerObj == null)
+            playerObj = FindObjectOfType<PlayerMovement>().gameObject;
     }
+
 
     // Update is called once per frame
     void Update()
@@ -50,6 +53,10 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
+        if (isGrounded)
+        {
+            lastGrounded = new Vector3(playerObj.transform.position.x, playerObj.transform.position.y, playerObj.transform.position.z);
+        }
         // jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -68,11 +75,11 @@ public class PlayerMovement : MonoBehaviour
             speed = 15;
         }
 
-        if(p.position.y < 9f)
+        if(playerObj.transform.position.y < 9.5f)
         {
-            transform.position = new Vector3(836.33f, 11.73f, -871.65f);
+            transform.position = lastGrounded;
+            isGrounded = false;
         }
-
     }
     
 }
